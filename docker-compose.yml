@@ -1,0 +1,18 @@
+version: "3"
+services:
+  incode_api:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - incode-database
+    environment:
+      - "SPRING_PROFILES_ACTIVE=deploy"
+      - "SPRING_DATA_MONGODB_HOST=incode-database"
+      - "SPRING_DATA_MONGODB_DATABASE=incode-user"
+  incode-database:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
